@@ -5,12 +5,7 @@ enum CardShape {
     Diamond = "Diamond"
 }
 
-const CardShapeAsArray = [
-    CardShape.Spade,
-    CardShape.Heart,
-    CardShape.Clover,
-    CardShape.Diamond
-]
+const CardShapeAsArray = [CardShape.Spade, CardShape.Heart, CardShape.Clover, CardShape.Diamond]
 
 export default CardShape
 export { CardShapeAsArray }

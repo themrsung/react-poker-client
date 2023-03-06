@@ -46,6 +46,7 @@
         "semi": false,
         "bracketSameLine": true,
         "singleQuote": false,
-        "trailingComma": "none"
+        "trailingComma": "none",
+        "printWidth": 130
     }
 }
