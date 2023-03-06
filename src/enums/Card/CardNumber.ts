@@ -30,7 +30,7 @@ const CardNumberAsArray = [
     CardNumber.Ace
 ]
 
-function getNextCardNumber(number: CardNumber) {
+function getNextCardNumberOf(number: CardNumber) {
     switch (number) {
         case CardNumber.Ace:
             return CardNumber.Deuce
@@ -73,7 +73,7 @@ function getNextCardNumber(number: CardNumber) {
     }
 }
 
-function getPreviousCardNumber(number: CardNumber) {
+function getPreviousCardNumberOf(number: CardNumber) {
     switch (number) {
         case CardNumber.Ace:
             return CardNumber.King
@@ -118,4 +118,4 @@ function getPreviousCardNumber(number: CardNumber) {
 
 export default CardNumber
 export { CardNumberAsArray }
-export { getNextCardNumber, getPreviousCardNumber }
+export { getNextCardNumberOf, getPreviousCardNumberOf }

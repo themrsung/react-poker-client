@@ -1,4 +1,4 @@
-import CardNumber, { CardNumberAsArray, getNextCardNumber } from "../../enums/Card/CardNumber"
+import CardNumber, { CardNumberAsArray, getNextCardNumberOf } from "../../enums/Card/CardNumber"
 import CardShape, { CardShapeAsArray } from "../../enums/Card/CardShape"
 import CardValue from "../../enums/Card/CardValue"
 import Card from "./Card"
@@ -59,10 +59,10 @@ class CardCombination {
     private hasStraight = () => {
         for (let i = 0; i < CardNumberAsArray.length - 4; i++) {
             const firstNumber: CardNumber = Object.values(CardNumber).indexOf(CardNumberAsArray[i])
-            const secondNumber = getNextCardNumber(firstNumber)
-            const thirdNumber = getNextCardNumber(secondNumber)
-            const fourthNumber = getNextCardNumber(thirdNumber)
-            const fifthNumber = getNextCardNumber(fourthNumber)
+            const secondNumber = getNextCardNumberOf(firstNumber)
+            const thirdNumber = getNextCardNumberOf(secondNumber)
+            const fourthNumber = getNextCardNumberOf(thirdNumber)
+            const fifthNumber = getNextCardNumberOf(fourthNumber)
 
             const requiredNumbers: Array<CardNumber> = [firstNumber, secondNumber, thirdNumber, fourthNumber, fifthNumber]
 
