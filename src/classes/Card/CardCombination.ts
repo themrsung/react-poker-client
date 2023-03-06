@@ -25,8 +25,7 @@ class CardCombination {
     private hasFlush = () => {
         for (let i = 0; i < CardShapeAsArray.length; i++) {
             const shape = CardShapeAsArray[i]
-            if (this.getCardsByShape(CardShapeAsArray[i]).length >= 5)
-                return true
+            if (this.getCardsByShape(shape).length >= 5) return true
         }
 
         return false
@@ -130,6 +129,63 @@ class CardCombination {
         return false
     }
 
+    private hasTriple = () => {
+        for (let i = 0; i < CardNumberAsArray.length; i++) {
+            const cards = this.getCardsByNumber(CardNumberAsArray[i])
+            if (cards.length >= 3) return true
+        }
+
+        return false
+    }
+
+    private getHighestCardInTriple = () => {
+        let highestCard = null
+
+        for (let i = 0; i < CardNumberAsArray.length; i++) {
+            const cards = this.getCardsByNumber(CardNumberAsArray[i])
+            if (cards.length >= 3) {
+                highestCard = cards[0]
+            }
+        }
+
+        return highestCard
+    }
+
+    private hasPair = () => {
+        for (let i = 0; i < CardNumberAsArray.length; i++) {
+            const cards = this.getCardsByNumber(CardNumberAsArray[i])
+            if (cards.length >= 2) return true
+        }
+
+        return false
+    }
+
+    private getHighestCardInPair = () => {
+        let highestCard = null
+
+        for (let i = 0; i < CardNumberAsArray.length; i++) {
+            const cards = this.getCardsByNumber(CardNumberAsArray[i])
+            if (cards.length >= 2) {
+                highestCard = cards[0]
+            }
+        }
+
+        return highestCard
+    }
+
+    private getCardNumbersOfPair = () => {
+        const numbers: Array<CardNumber> = []
+
+        for (let i = 0; i < CardNumberAsArray.length; i++) {
+            const cards = this.getCardsByNumber(CardNumberAsArray[i])
+            if (cards.length === 2) {
+                numbers.push(cards[0].getNumber())
+            }
+        }
+
+        return numbers
+    }
+
     getCardCombinationValue() {
         if (this.hasFlush() && this.hasStraight()) {
             if (
@@ -144,20 +200,24 @@ class CardCombination {
 
         if (this.hasFourCard()) return CardValue.FourCard
 
-        // full house
+        if (
+            this.hasTriple() &&
+            this.getCardNumbersOfPair().filter(
+                cn => cn !== this.getHighestCardInTriple()?.getNumber()
+            ).length >= 1
+        )
+            return CardValue.FullHouse
 
         if (this.hasFlush()) return CardValue.Flush
 
         if (this.hasStraight()) return CardValue.Straight
 
-        // triple
+        if (this.hasTriple()) return CardValue.Triple
 
-        // 2p
-
-        // 1p
+        if (this.hasPair()) return CardValue.Pair
 
         return CardValue.HighCard
     }
 }
 
-export default Card
+export default CardCombination
